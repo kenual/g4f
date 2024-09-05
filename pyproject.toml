@@ -1,0 +1,11 @@
+[project]
+name = "gpt4free"
+version = "0.0.0"
+dependencies = ["g4f[all]"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+editor = "app:main"
