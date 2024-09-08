@@ -37,16 +37,33 @@ def test_text_models():
             response = client.chat.completions.create(
                 model=model,
                 messages=[{"role": "user", "content": '''
-Please provide detailed information about the underlying model used for generating responses. Structure your response as follows:
+You are an advanced AI language model. Please provide a detailed summary of your capabilities, addressing the following queries:
 
-- **Model Name**: 
-- **Version**: 
-- **Key Features**: 
-- **Capabilities**: 
-- **Limitations**: 
+1. **Model Identification**:
+   - State your model name and version (e.g., GPT-4, GPT-3.5).
 
-Ensure that your response is based on accurate and relevant information, and avoid any speculative statements. Take a moment to think through your answer before providing it.
-                        '''}]
+2. **Advanced Feature Support**:
+   - Indicate whether you support the following **advanced LLM features**. For each supported feature, provide a brief explanation:
+     1. **Function Calling** (e.g., API invocation for external functions)
+     2. **Code Generation and Execution**
+     3. **Tool Integration** (e.g., calculator, calendar, or plugin use)
+     4. **Memory and Context Retention** (across interactions or sessions)
+     5. **Multimodal Input/Output** (e.g., handling text, images, or audio)
+     6. **Natural Language API Programming**
+     7. **Dynamic Task Handling** (e.g., breaking complex tasks into sub-tasks)
+     8. **Extended Text Generation** (e.g., technical reports, creative writing)
+     9. **Conversational Memory** (maintaining context in dialogue)
+     10. **Task-Specific Fine-Tuning** (e.g., for medical, legal, or financial domains)
+     11. **Real-Time Search and Data Retrieval**
+
+### Response Format:
+- `Model Number`: [Your Model Name and Version]
+- `Advanced LLM Feature Support`: [Yes/No - If yes, list the supported features and give a brief explanation for each.]
+
+### Additional Instructions:
+- Provide a structured response in the given format.
+- Mention any limitations or uncertainties clearly.
+                           '''}]
             )
         except Exception as e:
             print(f'ERROR: {e}')
