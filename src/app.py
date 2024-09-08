@@ -14,13 +14,31 @@ def gui():
 
 def test_image_models():
     image_models = [sdxl, sd_3, playground_v2_5, flux, flux_realism,
-                    flux_anime, flux_3d, flux_disney, dalle, dalle_mini, emi]
+                    flux_anime, flux_3d, flux_disney]
     client = Client()
-    response = client.images.generate(
-        model="gemini",
-        prompt="a white siamese cat",
-    )
-    image_url = response.data[0].url
+
+    unavailable_models = [dalle.name, dalle_mini.name, emi.name]
+    working_models = []
+
+    for model in image_models:
+        print(f'{model}: ')
+        try:
+            response = client.images.generate(
+                model=model.name,
+                prompt="a Python programming language illustration",
+            )
+        except Exception as e:
+            print(f'ERROR: {e}')
+            unavailable_models.append(model.name)
+            continue
+
+        working_models.append(model.name)
+        image_url = response.data[0].url
+        print(image_url)
+        print()
+
+    print(f'Unavailable models: {unavailable_models}')
+    print(f'Image models: {working_models}')
 
 
 def test_text_models():
@@ -75,8 +93,8 @@ You are an advanced AI language model. Please provide a detailed summary of your
         print()
 
     print(f'Unavailable models: {unavailable_models}')
-    print(f'Text models: {text_models}')
+    print(f'Text models: {working_models}')
 
 
 if __name__ == "__main__":
-    test_text_models()
+    test_image_models()
